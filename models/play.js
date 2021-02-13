@@ -40,7 +40,6 @@ Play.init({
     ]
 });
 
-Play.belongsTo(Board);
 Play.beforeCreate(play => play.id = uuid());
 
 syncPlay();

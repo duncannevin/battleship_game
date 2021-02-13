@@ -52,7 +52,6 @@ Ship.init({
     ]
 });
 
-Ship.belongsTo(Board);
 Ship.beforeCreate(ship => ship.id = uuid());
 
 syncShip();

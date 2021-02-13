@@ -10,6 +10,9 @@ const authenticate = require('./middlewares/authenticate');
 
 const app = express();
 
+const boardRouter = require('./routes/board');
+const gameRouter = require('./routes/game');
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(authenticate);
@@ -17,5 +20,8 @@ app.use(log4js.connectLogger(log4js.getLogger('http'), {level: 'auto'}));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
+
+app.use('/board', boardRouter);
+app.use('/game', gameRouter);
 
 module.exports = app;
