@@ -1,9 +1,12 @@
 const { Op } = require('sequelize');
-const Board = require('../models/board');
+const { Board, Ship, Play } = require('../database');
 const log = require('log4js').getLogger('service:board');
 
 async function createBoard(userId) {
-    const { dataValues } = await Board.create({ userId });
+    const { dataValues } = await Board.create(
+        { userId },
+        { include: [ Play, Ship ] }
+    );
     log.debug(`Created board for user ${dataValues.userId}: ${dataValues.id}`)
     return dataValues;
 }
@@ -18,13 +21,13 @@ async function getBoardsByIds(board1Id, board2Id) {
                 where: { boardId: board2Id }
             }
         ]
-    });
+    }, {include: [Ship, Play]});
     log.debug(`Got boards by 2 board id's: b1 ${board1Id}, b2 ${board2Id}`);
     return dataValues.map(board => board.dataValues);
 }
 
 async function getBoardById(boardId) {
-    const { dataValues } = await Board.findByPk(boardId);
+    const dataValues = await Board.findByPk(boardId, { include: [ Ship, Play ]});
     log.debug(`Got board by id: ${dataValues}`);
     return dataValues;
 }

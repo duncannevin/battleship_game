@@ -15,6 +15,14 @@ function handleError(error, req, res) {
         return res.status(401).send();
     }
 
+    if (error.message && error.message === 'Bad request') {
+        return res.status(400).send();
+    }
+
+    if (error.message && error.message === 'Not found') {
+        return res.status(404).send();
+    }
+
     log.error(`Internal server error: ${error}`);
     return res.status(500).send();
 }

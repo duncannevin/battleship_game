@@ -12,6 +12,7 @@ const app = express();
 
 const boardRouter = require('./routes/board');
 const gameRouter = require('./routes/game');
+const shipRouter = require('./routes/ship');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -23,5 +24,6 @@ app.use(cookieParser());
 
 app.use('/board', boardRouter);
 app.use('/game', gameRouter);
+app.use('/ship', shipRouter);
 
 module.exports = app;

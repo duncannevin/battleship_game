@@ -13,6 +13,23 @@ const db = new Sequelize(
     }
 );
 
+testConnection();
+
+const modelInitializers = [
+    require('../models/board').initialize,
+    require('../models/game').initialize,
+    require('../models/play').initialize,
+    require('../models/ship').initialize,
+];
+
+modelInitializers.forEach((init) => init(db));
+
+require('../models/relations')(db.models);
+
+db.sync({ force: true });
+
+module.exports = db.models;
+
 async function testConnection() {
     try {
         await db.authenticate();
@@ -24,6 +41,3 @@ async function testConnection() {
     }
 }
 
-testConnection();
-
-module.exports = db;

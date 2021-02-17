@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const Game = require('../models/game');
+const { Game } = require('../database');
 const log = require('log4js').getLogger('service:game');
 
 async function createGame(board1Id, board2Id) {
