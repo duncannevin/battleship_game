@@ -1,7 +1,7 @@
 const { createBoard, getBoardById } = require('../services/board');
 const { handleError } = require('./error');
 
-async function generateController(req, res) {
+async function createBoardController(req, res) {
     try {
         const { id } = req.user;
         const board = await createBoard(id);
@@ -26,4 +26,4 @@ async function getBoardController(req, res) {
     }
 }
 
-module.exports = { generateController, getBoardController };
+module.exports = { generateController: createBoardController, getBoardController };
