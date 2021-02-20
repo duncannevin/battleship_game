@@ -17,7 +17,7 @@ module.exports = { createPlayController };
 
 async function detectHit({ boardId, x, y }) {
     const { Ships } = await getBoardById(boardId);
-    return findHit(Ships);
+    return findHit(Ships, x, y);
 
     function findHit(ships, x, y) {
         if (!ships.length) {
