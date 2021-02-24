@@ -1,9 +1,5 @@
 const {DataTypes, Model} = require('sequelize');
-const log = require('log4js').getLogger('db:board');
 const { v4: uuid } = require('uuid');
-
-const Play = require('../models/play');
-const Ship = require('../models/ship');
 
 class Board extends Model {}
 

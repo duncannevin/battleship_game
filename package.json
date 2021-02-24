@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start:dev": "DEBUG=battleship-game:server NODE_ENV=development node ./bin/www",
+    "start:dev": "DEBUG=battleship-game:server NODE_ENV=development node --trace-warnings ./bin/www",
     "start": "NODE_ENV=production node ./bin/www"
   },
   "dependencies": {

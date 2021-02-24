@@ -1,6 +1,5 @@
 const {DataTypes, Model} = require('sequelize');
 const { v4: uuid } = require('uuid');
-const { getBoardById } = require('../services/board');
 
 class Play extends Model {}
 
@@ -47,6 +46,8 @@ function initialize(db) {
 module.exports = { Play, initialize };
 
 async function detectHit({ BoardId, x, y }) {
+    const { getBoardById } = require('../services/board');
+
     const { Ships } = await getBoardById(BoardId);
     return findHit(Ships, x, y);
 
