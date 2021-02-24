@@ -26,7 +26,7 @@ modelInitializers.forEach((init) => init(db));
 
 require('../models/relations')(db.models);
 
-db.sync({ force: true });
+db.sync({ force: DBConfig.forceSync });
 
 module.exports = db.models;
 
