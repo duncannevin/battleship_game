@@ -1,13 +1,13 @@
 const { createGame, getGameByBoardIds, getGameById } = require('../services/game');
 const { getBoardsByIds } = require('../services/board');
-const { handleError } = require('./error');
+const { ErrorEnum } = require('../enums');
 
-async function createGameController(req, res) {
+async function createGameController(req, res, next) {
     try {
         const boards = await getBoardsByIds(req.body.board1Id, req.body.board2Id);
 
         if (boards.length < 2) {
-            throw new Error('One board id not found');
+            throw new Error(ErrorEnum.NOT_FOUND);
         }
 
         let game = await getGameByBoardIds(req.body.board1Id, req.body.board2Id);
@@ -20,11 +20,12 @@ async function createGameController(req, res) {
 
         res.status(status).send(game);
     } catch (e) {
-        handleError(e, req, res);
+        res.error = e;
+        next();
     }
 }
 
-async function getGameController(req, res) {
+async function getGameController(req, res, next) {
     try {
         const id = req.params['id'];
         const board = await getGameById(id);
@@ -35,7 +36,8 @@ async function getGameController(req, res) {
 
         res.status(404).send();
     } catch (e) {
-        handleError(e, req, res);
+        res.error = e;
+        next();
     }
 }
 

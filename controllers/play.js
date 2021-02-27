@@ -1,13 +1,14 @@
 const { createPlay } = require('../services/play');
-const { handleError } = require('./error');
+const { handleError } = require('../middlewares/error');
 
-async function createPlayController(req, res) {
+async function createPlayController(req, res, next) {
     try {
         const play = await createPlay({ ...req.body });
 
         res.status(201).send(play);
     } catch (e) {
-        handleError(e, req, res);
+        res.error = e;
+        next();
     }
 }
 
