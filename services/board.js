@@ -27,9 +27,9 @@ async function getBoardsByIds(board1Id, board2Id) {
 }
 
 async function getBoardById(boardId) {
-    const dataValues = await Board.findByPk(boardId, { include: [ Ship, Play ]});
-    log.debug(`Got board by id: ${dataValues}`);
-    return dataValues;
+    const board = await Board.findByPk(boardId, { include: [ Ship, Play ]});
+    log.debug(`Got board by id: ${JSON.stringify(board)}`);
+    return board;
 }
 
 async function getBoardsByUserId(userId) {

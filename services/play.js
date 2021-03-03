@@ -1,8 +1,8 @@
 const { Play } = require('../models/play');
 const log = require('log4js').getLogger('service:play');
 
-async function createPlay({ boardId, x, y, hit }) {
-    const dataValue = await Play.create({ BoardId: boardId, x, y, hit});
+async function createPlay({ BoardId, x, y }) {
+    const dataValue = await Play.create({ BoardId, x, y });
     log.debug(`Play created ${dataValue}`);
     return dataValue;
 }

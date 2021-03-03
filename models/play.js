@@ -33,30 +33,36 @@ function initialize(db) {
             {
                 unique: true,
                 fields: ['id']
+            },
+            {
+                unique: true,
+                fields: ['BoardId', 'x', 'y']
             }
         ]
     });
 
     Play.beforeCreate(play => play.id = uuid());
-    Play.beforeCreate(play => {
-        play.hit = detectHit(play);
+    Play.beforeCreate(async (play) => {
+        play.hit = await updateHit(play);
+        play.played = true;
     });
 }
 
 module.exports = { Play, initialize };
 
-async function detectHit({ BoardId, x, y }) {
+async function updateHit({ dataValues: { BoardId, x, y } }) {
     const { getBoardById } = require('../services/board');
 
-    const { Ships } = await getBoardById(BoardId);
-    return findHit(Ships, x, y);
+    const board = await getBoardById(BoardId);
 
-    function findHit(ships, x, y) {
-        if (!ships.length) {
+    return findHit(board.dataValues, x, y);
+
+    function findHit({ Ships}, x, y) {
+        if (!Ships.length) {
             return false;
         }
 
-        const current = ships.shift();
+        const current = Ships.shift();
 
         if (current.orientation === 'n') {
             // size = 3
@@ -106,6 +112,6 @@ async function detectHit({ BoardId, x, y }) {
             }
         }
 
-        return findHit(ships, x, y);
+        return findHit({ Ships }, x, y);
     }
 }
