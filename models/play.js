@@ -69,7 +69,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 0/0 bow (x, y)
             /// x = 1/0
             /// x = 2/0 stern
-            for (let i = current.x; i <= (current.x + current.size); i++) {
+            for (let i = current.x; i < (current.x + current.size); i++) {
                 if (i === x && current.y === y) {
                     return true;
                 }
@@ -81,7 +81,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 0/2 stern
             /// x = 0/1
             /// x = 0/0 bow (x,y)
-            for (let i = current.y; i >= (current.y + current.size); i++) {
+            for (let i = current.y; i > (current.y + current.size); i++) {
                 if (i === y && current.x === x) {
                     return true;
                 }
@@ -93,7 +93,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 2/0 stern
             /// x = 1/0
             /// x = 0/0 bow (x,y)
-            for (let i = current.x; i >= (current.x - current.size); i--) {
+            for (let i = current.x; i > (current.x - current.size); i--) {
                 if (i === x && current.y === y ) {
                     return true;
                 }
@@ -105,7 +105,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 0/0 bow (x,y)
             /// x = 0/1
             /// x = 0/2 stern
-            for (let i = current.y; y <= (current.y + current.size); i++) {
+            for (let i = current.y; y < (current.y + current.size); i++) {
                 if (i === y && current.x === x) {
                     return true;
                 }
