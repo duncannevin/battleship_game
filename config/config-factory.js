@@ -9,7 +9,7 @@ const DBConfig = {
     port: process.env.DB_PORT || '3306',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'root',
-    forceSync: (process.env.DB_FORCE_SYNC !== 'true')
+    forceSync: (process.env.DB_FORCE_SYNC === 'true')
 };
 
 const JWTConfig = {

@@ -55,6 +55,10 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
 
     const board = await getBoardById(BoardId);
 
+    if (!board) {
+        return;
+    }
+
     return findHit(board.dataValues, x, y);
 
     function findHit({ Ships}, x, y) {

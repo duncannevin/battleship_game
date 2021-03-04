@@ -4,9 +4,9 @@ function handleError(req, res, next) {
     if (!error) {
         return next();
     }
-    console.log(error);
+
     if (error.hasOwnProperty('sql')) {
-        error.message = 500;
+        error.message = 400;
     }
 
     res.status(error.message).send();
