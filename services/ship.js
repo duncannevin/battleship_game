@@ -7,4 +7,10 @@ async function createShip({ boardId, orientation, x, y, size }) {
     return dataValue;
 }
 
-module.exports = { createShip };
+async function incrementHits(shipId) {
+    const foo = await Ship.increment({ hits: 1 }, { where: { id: shipId } });
+    log.debug(`Ship hits incremented ${foo}`);
+    return foo;
+}
+
+module.exports = { createShip, incrementHits };

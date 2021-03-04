@@ -1,3 +1,5 @@
+const logger = require('log4js').getLogger('middleware:error');
+
 function handleError(req, res, next) {
     const { error } = res;
 
@@ -6,6 +8,7 @@ function handleError(req, res, next) {
     }
 
     if (error.hasOwnProperty('sql')) {
+        logger.info(error);
         error.message = 400;
     }
 

@@ -52,6 +52,7 @@ module.exports = { Play, initialize };
 
 async function updateHit({ dataValues: { BoardId, x, y } }) {
     const { getBoardById } = require('../services/board');
+    const { incrementHits } = require('../services/ship');
 
     const board = await getBoardById(BoardId);
 
@@ -59,9 +60,9 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
         return;
     }
 
-    return findHit(board.dataValues, x, y);
+    return await findHit(board.dataValues, x, y);
 
-    function findHit({ Ships}, x, y) {
+    async function findHit({ Ships }, x, y) {
         if (!Ships.length) {
             return false;
         }
@@ -75,6 +76,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 2/0 stern
             for (let i = current.x; i < (current.x + current.size); i++) {
                 if (i === x && current.y === y) {
+                    await incrementHits(current.id);
                     return true;
                 }
             }
@@ -87,6 +89,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 0/0 bow (x,y)
             for (let i = current.y; i > (current.y + current.size); i++) {
                 if (i === y && current.x === x) {
+                    await incrementHits(current.id);
                     return true;
                 }
             }
@@ -99,6 +102,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 0/0 bow (x,y)
             for (let i = current.x; i > (current.x - current.size); i--) {
                 if (i === x && current.y === y ) {
+                    await incrementHits(current.id);
                     return true;
                 }
             }
@@ -111,6 +115,7 @@ async function updateHit({ dataValues: { BoardId, x, y } }) {
             /// x = 0/2 stern
             for (let i = current.y; y < (current.y + current.size); i++) {
                 if (i === y && current.x === x) {
+                    await incrementHits(current.id);
                     return true;
                 }
             }
