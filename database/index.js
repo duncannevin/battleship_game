@@ -17,7 +17,6 @@ testConnection();
 
 const modelInitializers = [
     require('../models/board').initialize,
-    require('../models/game').initialize,
     require('../models/play').initialize,
     require('../models/ship').initialize,
 ];

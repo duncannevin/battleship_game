@@ -11,7 +11,6 @@ const handleError = require('./middlewares/error');
 const app = express();
 
 const boardRouter = require('./routes/board');
-const gameRouter = require('./routes/game');
 const shipRouter = require('./routes/ship');
 const playRouter = require('./routes/play');
 
@@ -23,7 +22,6 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(authenticate);
 app.use('/board', boardRouter);
-app.use('/game', gameRouter);
 app.use('/ship', shipRouter);
 app.use('/play', playRouter);
 app.use(handleError);
