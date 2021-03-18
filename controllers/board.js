@@ -1,4 +1,4 @@
-const { createBoard, getBoardById, addOpponent } = require('../services/board');
+const { createBoard, getBoardById, addOpponent, getBoardsByUserId, getAwaitingBoards } = require('../services/board');
 const { ErrorEnum } = require('../enums');
 
 async function createBoardController(req, res, next) {
@@ -35,10 +35,30 @@ async function addOpponentController(req, res, next) {
         await addOpponent(b1Id, b2Id);
         res.send();
     } catch (e) {
-        console.log(e);
         res.error = e;
         next();
     }
 }
 
-module.exports = { generateController: createBoardController, getBoardController, addOpponentController };
+async function getBoardsController(req, res, next) {
+    try {
+        const { id: userId } = req.user;
+        const boards = await getBoardsByUserId(userId);
+        res.send(boards);
+    } catch (e) {
+        res.error = e;
+        next();
+    }
+}
+
+async function getAwaitingController(req, res, next) {
+    try {
+        const boards = await getAwaitingBoards();
+        res.send(boards);
+    } catch (e) {
+        res.error = e;
+        next();
+    }
+}
+
+module.exports = { getAwaitingController, getBoardsController, generateController: createBoardController, getBoardController, addOpponentController };

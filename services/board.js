@@ -33,8 +33,9 @@ async function getBoardById(boardId) {
 }
 
 async function getBoardsByUserId(userId) {
-    const { dataValues } = await Board.findAll({
-        where: { userId }
+    const dataValues = await Board.findAll({
+        where: { userId },
+        include:  [ Ship, Play, { model: Board, as: 'Opponent', include: [ Play ] } ]
     });
     log.debug(`Got boards by userId: ${dataValues}`);
     return dataValues;
@@ -46,4 +47,10 @@ async function addOpponent(b1Id, b2Id) {
     log.debug(`Opponent ${b1Id} added to ${b2Id}`);
 }
 
-module.exports = { createBoard, getBoardsByIds, getBoardById, getBoardsByUserId, addOpponent };
+async function getAwaitingBoards() {
+    return await Board.findAll({
+        where: {OpponentId: null}
+    });
+}
+
+module.exports = { getAwaitingBoards, createBoard, getBoardsByIds, getBoardById, getBoardsByUserId, addOpponent };
