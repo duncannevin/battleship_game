@@ -27,7 +27,7 @@ async function getBoardsByIds(board1Id, board2Id) {
 }
 
 async function getBoardById(boardId) {
-    const board = await Board.findByPk(boardId, { include: [ Ship, Play ]});
+    const board = await Board.findByPk(boardId, { include: [ Ship, Play, { model: Board, as: 'Opponent', include: [ Play ] } ]});
     log.debug(`Got board by id: ${JSON.stringify(board)}`);
     return board;
 }
@@ -40,4 +40,10 @@ async function getBoardsByUserId(userId) {
     return dataValues;
 }
 
-module.exports = { createBoard, getBoardsByIds, getBoardById, getBoardsByUserId };
+async function addOpponent(b1Id, b2Id) {
+    await Board.update({ OpponentId: b1Id }, { where: { id: b2Id } });
+    await Board.update({ OpponentId: b2Id }, { where: { id: b1Id } });
+    log.debug(`Opponent ${b1Id} added to ${b2Id}`);
+}
+
+module.exports = { createBoard, getBoardsByIds, getBoardById, getBoardsByUserId, addOpponent };
