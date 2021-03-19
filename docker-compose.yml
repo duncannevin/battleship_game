@@ -7,7 +7,7 @@ services:
     links:
       - db
     ports:
-      - 3000:3000
+      - 3333:3333
     environment:
       DB_HOST: 'db'
       DB_PORT: '3306'
