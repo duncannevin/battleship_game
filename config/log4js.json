@@ -26,7 +26,7 @@
     }
   },
   "categories": {
-    "default": { "appenders": [ "app", "errors" ], "level": "DEBUG" },
+    "default": { "appenders": [ "app", "errors", "console" ], "level": "DEBUG" },
     "http": { "appenders": [ "access" ], "level": "DEBUG" }
   }
 }
