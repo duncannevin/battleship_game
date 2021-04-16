@@ -1,6 +1,6 @@
 const ServerConfig = {
     host: process.env.HOST || 'localhost',
-    port: process.env.PORT || 3333
+    port: process.env.PORT || 4444
 };
 
 const DBConfig = {

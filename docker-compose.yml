@@ -6,7 +6,7 @@ services:
     image: battleship/game
     restart: unless-stopped
     ports:
-      - 3333:3333
+      - 4444:4444
     environment:
       DB_HOST: ${DO_DB_HOST}
       DB_PORT: ${DO_DB_PORT}
@@ -17,5 +17,5 @@ services:
     volumes:
       - ../log/battleship_game:/log
     build:
-      context: .
+      context: ~/Documents/battleship/battleship_game
       dockerfile: Dockerfile
