@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  battleship_game:
+    container_name: battleship_game
+    image: battleship/game
+    restart: unless-stopped
+    ports:
+      - 3333:3333
+    environment:
+      DB_HOST: ${DO_DB_HOST}
+      DB_PORT: ${DO_DB_PORT}
+      DB_USER: ${DO_DB_USER}
+      DB_PASSWORD: ${DO_DB_PASSWORD}
+      JWT_SECRET: ${BATTLESHIP_JWT_SECRET}
+      UPDATER_LOCATION: ${BATTLESHIP_UPDATER_LOCATION}
+    volumes:
+      - ../log/battleship_game:/log
+    build:
+      context: .
+      dockerfile: Dockerfile
