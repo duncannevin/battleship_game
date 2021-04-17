@@ -13,9 +13,11 @@ services:
       DB_USER: ${DO_DB_USER}
       DB_PASSWORD: ${DO_DB_PASSWORD}
       JWT_SECRET: ${BATTLESHIP_JWT_SECRET}
-      UPDATER_LOCATION: ${BATTLESHIP_UPDATER_LOCATION}
+      UPDATER_LOCATION: "http://battleship:9999/api/updater"
     volumes:
-      - ../log/battleship_game:/log
+      - ./log/battleship_game:/log
     build:
       context: ~/Documents/battleship/battleship_game
       dockerfile: Dockerfile
+    depends_on:
+      - battleship

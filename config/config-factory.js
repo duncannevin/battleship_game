@@ -19,7 +19,7 @@ const JWTConfig = {
 };
 
 const UpdaterConfig = {
-    location: process.env.BATTLESHIP_UPDATER_LOCATION || 'http://localhost:5555'
+    location: process.env.UPDATER_LOCATION || process.env.BATTLESHIP_UPDATER_LOCATION || 'http://localhost:5555'
 }
 
 module.exports = { ServerConfig, DBConfig, JWTConfig, UpdaterConfig };
