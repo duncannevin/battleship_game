@@ -18,4 +18,8 @@ const JWTConfig = {
     realm: process.env.JWT_REALM || 'com.duncannevin'
 };
 
-module.exports = { ServerConfig, DBConfig, JWTConfig };
+const UpdaterConfig = {
+    location: process.env.BATTLESHIP_UPDATER_LOCATION || 'http://localhost:5555'
+}
+
+module.exports = { ServerConfig, DBConfig, JWTConfig, UpdaterConfig };
