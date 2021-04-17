@@ -2,6 +2,9 @@ const express = require('express');
 const log4js = require('log4js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const axios = require('axios');
+
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 require('./database');
 
