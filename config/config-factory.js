@@ -4,11 +4,11 @@ const ServerConfig = {
 };
 
 const DBConfig = {
-    name: process.env.DB_NAME || process.env.DO_DB_NAME || 'battleship_game',
-    host: process.env.DB_HOST || process.env.DO_DB_HOST || 'localhost',
-    port: process.env.DB_PORT || process.env.DO_DB_PORT || '3306',
-    user: process.env.DB_USER || process.env.DO_DB_USER || 'root',
-    password: process.env.DB_PASSWORD || process.env.DO_DB_PASSWORD || 'password',
+    name: process.env.DB_NAME || 'battleship_game',
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || '3306',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'password',
     forceSync: (process.env.DB_FORCE_SYNC === 'true')
 };
 
